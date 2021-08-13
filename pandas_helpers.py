@@ -36,27 +36,24 @@ class PandaHelpers:
             raise ValueError(f'Not csv or Xlsx filetype; File type is {file_ext}')
 
 
-    def lookup_match(lookup_col, match_df, match_col, match_return):
+    def lookup_match(lookup_col, match_col, match_return):
         """
         Performs like a lookup. 
 
 
         Parameters:
         lookup_col (pd.Series) = Column to look up
-        match_df (pd.DataFrame) = df of match source
         match_col = column to match lookup
         match_return = return value
 
         Returns:
         Series : Series of match_return
         """
-        
-        
-        #drop na from index column
-        match_df = match_df.dropna(subset=[match_col])
-        
-        #set index at 'match_col' with return col match_return and convert to dict
-        match_dict = match_df.set_index(match_col)[match_return].to_dict()
+        # create Series using match columns
+        lookup_series = pd.Series(match_return.values, index=match_col)
+
+        #drop NA indexes in lookup_series and convert to dict
+        match_dict = lookup_series[lookup_series.index.dropna()].to_dict()
         
         #map look_col to match_dict
         return lookup_col.map(match_dict)  
