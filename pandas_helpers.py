@@ -56,7 +56,30 @@ class PandaHelpers:
         match_dict = lookup_series.loc[lookup_series.index.dropna()].to_dict()
         
         #map look_col to match_dict
-        return lookup_col.map(match_dict)  
+        return lookup_col.map(match_dict)
+
+
+    def filter_and_rename(dataframe, filter_columns, rename_cols= None):
+        """
+        Takes df and returns df with only columns in filter_columns (list)and then renaming the columns based on mapping in mapping_dict
+
+        Parameters
+        -----------
+        dataframe (pd.DataFrame) = Dataframe to convert
+        filter_columns (list) = [filter df for these cols]
+        mapping_dict (dict, optional) = {columns in df to be in return df (keys): new column name to appear in df (values)}
+
+        Returns
+        ---------
+        DataFrame : Dataframe with new column names
+
+        """
+
+        if rename_cols is None: 
+            # just return columns in filter column list if col rename dict is not provided
+            return dataframe[filter_columns]
+        else:  
+            return dataframe[filter_columns].rename(columns=rename_cols)
 
 
             
