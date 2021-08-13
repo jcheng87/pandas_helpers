@@ -53,7 +53,7 @@ class PandaHelpers:
         lookup_series = pd.Series(match_return.values, index=match_col)
 
         #drop NA indexes in lookup_series and convert to dict
-        match_dict = lookup_series[lookup_series.index.dropna()].to_dict()
+        match_dict = lookup_series.loc[lookup_series.index.dropna()].to_dict()
         
         #map look_col to match_dict
         return lookup_col.map(match_dict)  
