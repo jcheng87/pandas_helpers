@@ -10,17 +10,15 @@ class PandaHelpers:
         """
         Determines which pd.read_xxx (_csv vs _excel) to use depending on file extension
         
-        
         Parameters
-        -----
-        filename (str): Filename of file to pass through pd.read_xxx
+        -----------
+        fileame (str): Filename of file to pass through pd.read_xxx
         **kwarg : These parameters will be passed to DataFrame.to_csv or DataFrame.to_excel
         
         
         Returns
         --------
         pd.Dataframe
-        
         
         """
         
@@ -40,14 +38,16 @@ class PandaHelpers:
         """
         Performs like a lookup. 
 
-
-        Parameters:
+        Parameters
+        -----------
         lookup_col (pd.Series) = Column to look up
-        match_col = column to match lookup
-        match_return = return value
+        match_col (pd.Series) = column to match lookup
+        match_return (pd.Series) = column to return value
 
-        Returns:
+        Returns
+        ---------
         Series : Series of match_return
+
         """
         # create Series using match columns
         lookup_series = pd.Series(match_return.values, index=match_col)
